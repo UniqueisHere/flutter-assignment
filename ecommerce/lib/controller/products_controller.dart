@@ -15,6 +15,14 @@ class ProductsController extends GetxController {
   set searchResult(List<ProductsModel> showProducts) {
     _searchresult.value = showProducts;
   }
+
+  final _showAllCarts = <ProductsModel>[].obs;
+
+  set showAllCarts(List<ProductsModel> showCarts) {
+    _showAllCarts.value = showCarts;
+  }
+
+  List<ProductsModel> get showAllCarts => _showAllCarts.value;
 }
 
 ProductsController productsController = Get.put(ProductsController());

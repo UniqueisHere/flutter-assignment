@@ -12,14 +12,12 @@ class ProductServices {
     required BuildContext context,
     String? query,
   }) async {
-    print("object");
     try {
       String path = 'https://fakestoreapi.com/products';
       http.Response response = await http.get(
         Uri.parse(path),
       );
 
-      print('Ohhhhh');
       HttpHandler.handleHttpError(
         response: response,
         context: context,
@@ -29,9 +27,9 @@ class ProductServices {
             viewAllProducts.add(ProductsModel.fromJson(data));
           }
           productsController.showAllProducts(viewAllProducts);
+          productsController.searchResult = viewAllProducts;
         },
       );
-      print('None');
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

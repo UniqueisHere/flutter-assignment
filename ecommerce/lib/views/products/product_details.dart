@@ -1,17 +1,23 @@
+import 'package:ecommerce/constants/preferences.dart';
+import 'package:ecommerce/widgets/customized_favourite_button.dart';
+import 'package:ecommerce/widgets/customized_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/colors.dart';
+import '../../controller/products_controller.dart';
+import '../../services/product_services.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
+  final int id;
   final String title;
   final String ratings;
   final String totalVotes;
   final String category;
   final String description;
   final String image;
+  final String price;
   const ProductDetailsScreen({
     super.key,
     required this.title,
@@ -20,6 +26,8 @@ class ProductDetailsScreen extends StatelessWidget {
     required this.category,
     required this.description,
     required this.image,
+    required this.price,
+    required this.id,
   });
 
   @override
@@ -58,7 +66,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   height: 200,
                   width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
-                    color: AllColors.scaffoldColor,
+                    color: Color.fromARGB(255, 219, 219, 219),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
                         25,
@@ -78,86 +86,29 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          title,
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            color: AllColors.mainColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        CustomizedText(
+                          text: title.toUpperCase(),
+                          color: AllColors.mainColor,
+                          size: 22,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Row(
                           children: [
-                            Text(
-                              'Category:',
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                color: const Color.fromARGB(255, 174, 223, 255),
-                                fontWeight: FontWeight.bold,
-                              ),
+                            const CustomizedText(
+                              text: 'Category: ',
+                              color: AllColors.textColor,
+                              size: 15,
                             ),
                             const SizedBox(
                               width: 20,
                             ),
-                            Text(
-                              category,
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: AllColors.mainColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Description:',
-                          style: GoogleFonts.poppins(
-                            fontSize: 15,
-                            color: const Color.fromARGB(255, 174, 223, 255),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          description,
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            color: AllColors.mainColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Ratings:',
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                color: const Color.fromARGB(255, 174, 223, 255),
-                                fontWeight: FontWeight.bold,
-                              ),
+                            CustomizedText(
+                              text: category.toUpperCase(),
+                              color: AllColors.mainColor,
+                              size: 13,
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              ratings,
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: AllColors.mainColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
                           ],
                         ),
                         const SizedBox(
@@ -165,24 +116,74 @@ class ProductDetailsScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(
-                              'Total Counts:',
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                color: const Color.fromARGB(255, 174, 223, 255),
-                                fontWeight: FontWeight.bold,
-                              ),
+                            const CustomizedText(
+                              text: 'Price: ',
+                              color: AllColors.textColor,
+                              size: 15,
                             ),
                             const SizedBox(
                               width: 20,
                             ),
-                            Text(
-                              totalVotes,
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: AllColors.mainColor,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            CustomizedText(
+                              text: '\$ $price',
+                              color: AllColors.mainColor,
+                              size: 13,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const CustomizedText(
+                          text: 'Descriptions: ',
+                          color: AllColors.textColor,
+                          size: 15,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomizedText(
+                          text: description,
+                          color: AllColors.mainColor,
+                          size: 13,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            const CustomizedText(
+                              text: 'Ratings: ',
+                              color: AllColors.textColor,
+                              size: 15,
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            CustomizedText(
+                              text: ratings,
+                              color: AllColors.mainColor,
+                              size: 13,
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            const CustomizedText(
+                              text: 'Total Counts: ',
+                              color: AllColors.textColor,
+                              size: 15,
+                            ),
+                            const SizedBox(
+                              width: 7,
+                            ),
+                            CustomizedText(
+                              text: totalVotes,
+                              color: AllColors.mainColor,
+                              size: 13,
                             )
                           ],
                         ),
@@ -196,12 +197,32 @@ class ProductDetailsScreen extends StatelessWidget {
                 left: 20,
                 child: IconButton(
                   onPressed: () {
+                    ProductServices.showAllProductServices(context: context);
+                    productsController.showAllCarts;
+
                     Get.back();
                   },
                   icon: const FaIcon(
                     FontAwesomeIcons.chevronLeft,
                     color: Colors.white,
                   ),
+                ),
+              ),
+              Positioned(
+                right: 20,
+                top: 20,
+                child: CustomizedAddToCartButton(
+                  buttonPressed: () {
+                    Carts().addCarts(
+                        id: id,
+                        title: title,
+                        price: double.parse(price),
+                        description: description,
+                        category: category,
+                        image: image,
+                        rateCount: int.parse(totalVotes),
+                        rate: double.parse(ratings));
+                  },
                 ),
               ),
             ],
