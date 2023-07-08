@@ -32,7 +32,11 @@ class HttpHandler {
           //     ),
           //   ),
           // );
-          gett.Get.snackbar('Something went wrong!', error);
+          gett.Get.snackbar(
+            'Something went wrong!',
+            error,
+            backgroundColor: Colors.redAccent,
+          );
         } else if (json.decode(response.body)['email'] != null) {
           String error = json.decode(response.body)['email'][0];
           // ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +52,11 @@ class HttpHandler {
           //     ),
           //   ),
           // );
-          gett.Get.snackbar('Something went wrong!', error);
+          gett.Get.snackbar(
+            'Something went wrong!',
+            error,
+            backgroundColor: Colors.redAccent,
+          );
         } else if (json.decode(response.body)['password'] != null) {
           String error = json.decode(response.body)['password'][0];
           // ScaffoldMessenger.of(context).showSnackBar(
@@ -64,7 +72,11 @@ class HttpHandler {
           //     ),
           //   ),
           // );
-          gett.Get.snackbar('Something went wrong!', error);
+          gett.Get.snackbar(
+            'Something went wrong!',
+            error,
+            backgroundColor: Colors.redAccent,
+          );
         }
         break;
       default:
@@ -80,8 +92,11 @@ class HttpHandler {
         //     ),
         //   ),
         // );
-        gett.Get.snackbar('Something went wrong!',
-            'Unable to connect to server. Please try later');
+        gett.Get.snackbar(
+          'Something went wrong!',
+          backgroundColor: Colors.redAccent,
+          'Unable to connect to server. Please try later',
+        );
         break;
     }
   }

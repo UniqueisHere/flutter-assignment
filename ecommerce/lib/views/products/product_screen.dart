@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../constants/preferences.dart';
 import '../../models/products_model.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -106,6 +107,8 @@ class _ProductScreenState extends State<ProductScreen> {
                           const Spacer(),
                           IconButton(
                               onPressed: () {
+                                Carts().getCarts();
+
                                 Get.to(const CartScreen());
                               },
                               icon: const Icon(
@@ -179,7 +182,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                               .linearToSrgbGamma(),
                                           image: NetworkImage(
                                               productDetails.image),
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),

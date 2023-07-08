@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
-import '../../controller/products_controller.dart';
 import '../../services/product_services.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -198,7 +197,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                     ProductServices.showAllProductServices(context: context);
-                    productsController.showAllCarts;
+                    Carts().getCarts();
 
                     Get.back();
                   },

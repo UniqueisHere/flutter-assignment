@@ -64,10 +64,22 @@ class Carts {
               rate: map['rating']['rate'], count: map['rating']['count']));
       cartss.add(model);
     }
-    print('-----------------------------');
     productsController.showAllCarts = cartss;
     return cartss;
   }
 
-// Save an integer value to 'counter' key.
+  Future<void> deleteCartItem(int id) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<ProductsModel> products = await getCarts();
+    List<String> updatedCartItems = [];
+
+    for (var data in products) {
+      if (data.id != id) {
+        updatedCartItems.add(jsonEncode(data.toJson()));
+      }
+    }
+
+    await prefs.setStringList('userCart', updatedCartItems);
+  }
 }

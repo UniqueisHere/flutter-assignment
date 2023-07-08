@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constants/colors.dart';
 
@@ -26,21 +27,32 @@ class _CustomizedAddToCartButtonState extends State<CustomizedAddToCartButton> {
         setState(() {
           if (isFavorite == true) {
             isFavorite = false;
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: AllColors.mainColor,
-                content: Text("Romoved From Your Favorite"),
-              ),
+            // ScaffoldMessenger.of(context).clearSnackBars();
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(
+            //     backgroundColor: AllColors.mainColor,
+            //     content: Text("Romoved From Your Favorite"),
+            //   ),
+            // );
+            Get.snackbar(
+              'Success',
+              'Removed from your Favorite',
+              backgroundColor: Colors.redAccent,
+              
             );
           } else {
             isFavorite = true;
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: AllColors.mainColor,
-                content: Text("Added To Your Favourite"),
-              ),
+            // ScaffoldMessenger.of(context).clearSnackBars();
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(
+            //     backgroundColor: AllColors.mainColor,
+            //     content: Text("Added To Your Favourite"),
+            //   ),
+            // );
+            Get.snackbar(
+              'Success',
+              'Added To Your Favourite',
+              backgroundColor: AllColors.mainColor,
             );
           }
           // isFavorite ? isFavorite = false : isFavorite = true;
